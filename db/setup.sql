@@ -1,0 +1,55 @@
+CREATE TABLE IF NOT EXISTS users ( 
+  user_id INT NOT NULL AUTO_INCREMENT,
+  role_id INT NOT NULL,
+  username VARCHAR(30) NOT NULL,
+  points INT NOT NULL DEFAULT 0,
+  join_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  last_active DATETIME DEFAULT CURRENT_TIMESTAMP,
+  pw_hash CHAR(60),
+  PRIMARY KEY(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS posts ( 
+  post_id INT NOT NULL AUTO_INCREMENT,
+  author_id INT NOT NULL,
+  points INT NOT NULL DEFAULT 0,
+  post_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  body TEXT NOT NULL,
+  title TEXT NOT NULL,
+  views INT NOT NULL,
+  PRIMARY KEY(post_id)
+);
+
+CREATE TABLE IF NOT EXISTS roles (
+  role_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(30) NOT NULL,
+  PRIMARY KEY(role_id)
+);
+
+CREATE TABLE IF NOT EXISTS tags (
+  tag_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(30) NOT NULL,
+  PRIMARY KEY(tag_id)
+);
+
+CREATE TABLE IF NOT EXISTS votes_posts (
+  post_id INT NOT NULL,
+  author_id INT NOT NULL,
+  up BOOL
+);
+
+CREATE TABLE IF NOT EXISTS edits (
+  edit_id INT NOT NULL AUTO_INCREMENT,
+  author_id INT NOT NULL,
+  post_id INT NOT NULL,
+  edit_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  edited_title TEXT,
+  edited_body TEXT,
+  PRIMARY KEY(edit_id)
+);
+
+CREATE TABLE IF NOT EXISTS posts_tags (
+  post_id INT NOT NULL,
+  tag_id INT NOT NULL
+);
+
